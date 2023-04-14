@@ -14,7 +14,7 @@ public import core.memory;
 
 import core.sys.windows.windows;
 import core.sys.windows.dll;
-import bindbc.opengl;
+import derelict.gles.gles2;
 import core.stdc.stdlib;
 import utils;
 
@@ -38,7 +38,7 @@ void inInit(i2DTimingFuncSignature func) {
     try {
         version(NotWindows) Runtime.initialize();
         version(yesgl) {
-            loadOpenGL();
+            DerelictGLES2.load();
         }
         Inochi2D.inInit(func);
     } catch (Exception ex) {
@@ -59,7 +59,7 @@ void inUpdate() {
 */
 void inCleanup() {
     version(yesgl) {
-        unloadOpenGL();
+        //unloadOpenGL();
     }
     version(NotWindows) Runtime.terminate();
 }

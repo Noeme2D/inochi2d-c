@@ -3,26 +3,27 @@ description "Inochi2D C compatibility layer"
 authors "Inochi2D Project"
 copyright "Copyright © 2022, Inochi2D Project"
 license "BSD 2-clause"
-dependency "inochi2d" version="~>0.7.1"
+dependency "inochi2d" version="~>1.0.0"
 targetType "dynamicLibrary"
 targetPath "out/"
 
 toolchainRequirements dmd="no" gdc="no" ldc=">=1.11.0"
 
 dflags "-mscrtlib=msvcrt" platform="windows-ldc" // Use the dynamic CRT on Windows.
-dflags "-flto=full" platform="ldc"
+//dflags "-flto=full" platform="ldc"
 dflags "-fvisibility=hidden" platform="ldc"
 dflags "-link-defaultlib-shared=false" platform="ldc"
 dflags "-d-version=GL_ARB" platform="ldc"
 
 copyFiles "*/inochi2d-c.lib" platform="windows-ldc" // On Windows, copy the lib file to allow usage of link.exe
 
+configuration "yesgl" {
+    subConfiguration "inochi2d" "full"
+    versions "yesgl"
+}
+
 configuration "nogl" {
     subConfiguration "inochi2d" "renderless"
     versions "nogl"
 }
 
-configuration "yesgl" {
-    subConfiguration "inochi2d" "full"
-    versions "yesgl"
-}
