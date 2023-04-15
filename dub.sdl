@@ -9,13 +9,8 @@ targetPath "out/"
 
 toolchainRequirements dmd="no" gdc="no" ldc=">=1.11.0"
 
-dflags "-mscrtlib=msvcrt" platform="windows-ldc" // Use the dynamic CRT on Windows.
-//dflags "-flto=full" platform="ldc"
-dflags "-fvisibility=hidden" platform="ldc"
-dflags "-link-defaultlib-shared=false" platform="ldc"
-dflags "-d-version=GL_ARB" platform="ldc"
-
-copyFiles "*/inochi2d-c.lib" platform="windows-ldc" // On Windows, copy the lib file to allow usage of link.exe
+dflags "-fvisibility=hidden"
+dflags "-link-defaultlib-shared=false"
 
 configuration "yesgl" {
     subConfiguration "inochi2d" "full"

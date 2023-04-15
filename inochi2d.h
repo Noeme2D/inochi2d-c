@@ -30,8 +30,8 @@ extern "C" {
     void inCleanup();
     void inUpdate();
     void inBlockProtected(void (*func)());
-    void inViewportSet(float width, float height);
-    void inViewportGet(float* width, float* height);
+    void inViewportSet(int width, int height);
+    void inViewportGet(int* width, int* height);
     #ifdef INOCHI2D_GLYES
         void inSceneBegin();
         void inSceneEnd();
