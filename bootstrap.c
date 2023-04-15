@@ -30,8 +30,8 @@ int main() {
     inInit(&timingFunc);
 
     // viewport size, which is the size of the scene
-    int sceneWidth; 
-    int sceneHeight;
+    uint sceneWidth; 
+    uint sceneHeight;
 
     // It is highly recommended to change the viewport with
     // inSetViewport to match the viewport you want, otherwise it'll be 640x480
@@ -49,6 +49,21 @@ int main() {
     // NOTE: Loading API WIP, subject to change
     // You can get example models at https://github.com/Inochi2D/example-models
     InPuppet* myPuppet = inPuppetLoad("Aka.inx");
+
+    struct {
+        size_t len;
+        InParameter **cont;
+    } parameters;
+    // let D allocate memory
+    parameters.cont = NULL;
+    inPuppetGetParameters(myPuppet, &parameters.cont, &parameters.len);
+    for (size_t i = 0; i < parameters.len; i++) {
+        char *name = inParameterGetName(parameters.cont[i]);
+        bool isVec2 = inParameterIsVec2(parameters.cont[i]);
+        printf("Parameter #%zu: %s is%s vec2.\n", i, name, isVec2 ? "" : " not");
+    }
+
+    inParameterSetValue(parameters.cont[1], -1, 0);
 
     while(!glfwWindowShouldClose(window)) {
         // NOTE: Inochi2D does not itself clear the main framebuffer
