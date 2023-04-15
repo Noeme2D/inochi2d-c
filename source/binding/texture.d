@@ -78,11 +78,6 @@ void inTextureSetData(InTexture* texture, ubyte* buffer, size_t length) {
     texture.texture.setData(data);
 }
 
-void inTextureGetTextureData(InTexture* texture, bool unmultiply, ubyte** buffer, size_t* length) {
-    auto data = texture.texture.getTextureData(unmultiply);
-    array2carray!(ubyte, ubyte)(data, buffer, length);
-}
-
 void inTextureDestroy(InTexture* texture) {
     free_obj(texture);
 }
